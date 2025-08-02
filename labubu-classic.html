@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <title>THE MONSTERS COCA COLA EDITION VINYL FIGURE – BLIND BOX</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="left">
+          <img src="labubu.jpeg" alt="Labubu" />
+          <a href="index.html" class="labubu-brand-btn">Labubu</a>
+        </div>
+        <nav>
+          <a href="#contacts">Contacts</a>
+        </nav>
+        <button
+          id="theme-toggle"
+          aria-label="Toggle theme"
+          style="
+            margin-left: 20px;
+            padding: 8px 18px;
+            border-radius: 14px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+          "
+        >
+          🌙
+        </button>
+      </header>
+      <main>
+        <section
+          class="section"
+          style="display: flex; flex-wrap: wrap; align-items: center; gap: 40px; justify-content: center;"
+        >
+          <div id="product-image-slider" style="display:flex;align-items:center;gap:18px;">
+            <button id="product-slider-left" style="font-size:2rem;background:#eee;border:none;border-radius:50%;width:48px;height:48px;cursor:pointer;">&#8592;</button>
+            <img id="product-slider-img" src="labubu.jpeg" alt="Labubu Classic" class="product-detail-img" style="max-width:320px;border-radius:16px;box-shadow:0 2px 8px #b39ddb22;">
+            <button id="product-slider-right" style="font-size:2rem;background:#eee;border:none;border-radius:50%;width:48px;height:48px;cursor:pointer;">&#8594;</button>
+          </div>
+          <div style="max-width: 400px; text-align: left">
+            <h2>THE MONSTERS COCA COLA EDITION VINYL FIGURE – BLIND BOX</h2>
+            <p>
+              Soft plush toy, 25 cm.<br />Perfect for hugs and gifts.
+              Hypoallergenic materials, original design.
+            </p>
+            <div class="price">199AED</div>
+            <p style="margin-top:10px;"><b><i class="fa-solid fa-truck" style="margin-right:6px;color:#25D366;"></i>FREE DELIVERY</b></p>
+          </div>
+        </section>
+        <section class="section" style="margin-top: 0">
+          <h2 style="font-size: 1.3rem; margin-bottom: 18px">
+            Other Labubu Toys
+          </h2>
+          <div class="products" style="justify-content: center; gap: 28px">
+            <div class="product">
+              <img src="labubu2.webp" alt="Mini Labubu" />
+              <h3>Labubu The Monster Blind Box Of Trendy Tiny Elf Doll- Multi-Color</h3>
+              <p>Pocket friend, 10 cm</p>
+              <span class="price">179AED</span>
+             <a href="labubu-costume.html" class="product-link"></i>More Details</a>
+            </div>
+          </div>
+        </section>
+        <section id="contacts" class="section contacts">
+                <h2>Contacts</h2>
+                <p>For Order: +971568271469</p>
+                <a href="https://wa.me/971543748540"><i class="fa-brands fa-square-whatsapp"></i></a>
+            </section>
+      </main>
+    </div>
+    <footer class="footer">
+      <div>© 2025 Labubu — toys for happiness</div>
+    </footer>
+    <script>
+      const themeToggle = document.getElementById("theme-toggle");
+      function setTheme(theme) {
+        const body = document.body;
+        if (theme === "dark") {
+          body.classList.add("dark-theme");
+          themeToggle.textContent = "☀️";
+        } else {
+          body.classList.remove("dark-theme");
+          themeToggle.textContent = "🌙";
+        }
+      }
+      // Load theme from localStorage, default to dark
+      let savedTheme = localStorage.getItem("theme");
+      if (!savedTheme) {
+        savedTheme = "dark";
+        localStorage.setItem("theme", "dark");
+      }
+      setTheme(savedTheme === "dark" ? "dark" : "light");
+      themeToggle.addEventListener("click", () => {
+        const body = document.body;
+        const isDark = body.classList.toggle("dark-theme");
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+        setTheme(isDark ? "dark" : "light");
+      });
+      // Product image slider logic
+      const productSliderImages = ["labubu.jpeg", "labubusoke.webp"];
+      let productSliderIndex = 0;
+      const productSliderImg = document.getElementById("product-slider-img");
+      const productLeftBtn = document.getElementById("product-slider-left");
+      const productRightBtn = document.getElementById("product-slider-right");
+      if (productSliderImg) {
+        productSliderImg.src = productSliderImages[productSliderIndex];
+      }
+      if (productSliderImg && productLeftBtn && productRightBtn) {
+        productLeftBtn.onclick = function() {
+          productSliderIndex = (productSliderIndex - 1 + productSliderImages.length) % productSliderImages.length;
+          productSliderImg.src = productSliderImages[productSliderIndex];
+        };
+        productRightBtn.onclick = function() {
+          productSliderIndex = (productSliderIndex + 1) % productSliderImages.length;
+          productSliderImg.src = productSliderImages[productSliderIndex];
+        };
+      }
+
+      // Swipe logic for mobile
+      let touchStartX = null;
+      let touchEndX = null;
+      if (productSliderImg) {
+        productSliderImg.addEventListener('touchstart', function(e) {
+          touchStartX = e.changedTouches[0].screenX;
+        });
+        productSliderImg.addEventListener('touchend', function(e) {
+          touchEndX = e.changedTouches[0].screenX;
+          if (touchStartX !== null && touchEndX !== null) {
+            if (touchEndX < touchStartX - 30) {
+              // swipe left
+              productSliderIndex = (productSliderIndex + 1) % productSliderImages.length;
+              productSliderImg.src = productSliderImages[productSliderIndex];
+            } else if (touchEndX > touchStartX + 30) {
+              // swipe right
+              productSliderIndex = (productSliderIndex - 1 + productSliderImages.length) % productSliderImages.length;
+              productSliderImg.src = productSliderImages[productSliderIndex];
+            }
+          }
+          touchStartX = null;
+          touchEndX = null;
+        });
+      }
+    </script>
+  </body>
+</html>
